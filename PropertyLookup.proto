@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+// Define the request and response messages.
+message Reqs {
+    int32 zip = 1;
+    int32 limit = 2;
+}
+
+message response {
+    repeated string output = 1;
+}
+
+// Define the service.
+service returnAddress {
+    rpc LookupByZip(Reqs) returns (response);
+}

@@ -1,0 +1,16 @@
+FROM ubuntu:24.10
+
+RUN apt update && apt install -y python3 python3-pip bash \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install flask --break-system-packages
+
+RUN pip3 install grpcio-tools==1.70.0 grpcio==1.70.0 --break-system-packages
+
+WORKDIR /app
+COPY cache.py PropertyLookup_pb2.py PropertyLookup.proto PropertyLookup_pb2_grpc.py ./
+
+RUN python3 -m grpc_tools.protoc -I=. --python_out=. --grpc_python_out=. PropertyLookup.proto
+
+CMD ["python3","cache.py"]
+
