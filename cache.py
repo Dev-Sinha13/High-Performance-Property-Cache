@@ -13,7 +13,7 @@ dataset_channel_2 = grpc.insecure_channel(project_path + "-dataset-2:5000")
 stub_dataset_1 = PropertyLookup_pb2_grpc.returnAddressStub(dataset_channel_1)
 stub_dataset_2 = PropertyLookup_pb2_grpc.returnAddressStub(dataset_channel_2)
 
-app = Flask("p2")
+app = Flask("property-cache")
 
 last_used_server = "2"
 cache_storage = {}
